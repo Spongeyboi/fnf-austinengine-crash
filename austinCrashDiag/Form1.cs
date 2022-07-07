@@ -69,16 +69,21 @@ namespace austinCrashDiag
         private void Form1_Load(object sender, EventArgs e)
         {
             try
-            {
+            {   
+                //Load the temporary files
                 string errorText = System.IO.File.ReadAllText(@"logs\latestError.txt");
                 string errorStackText = System.IO.File.ReadAllText(@"logs\latestStack.txt");
 
                 if (errorText != "") TextBox1.Text = errorText;
                 if (errorStackText != "") RichTextBox1.Text = errorStackText;
+
+                //Delete the files now
+                System.IO.File.Delete(@"logs\latestError.txt");
+                System.IO.File.Delete(@"logs\latestStack.txt");
             }
             catch
             {
-                if (MessageBox.Show("What a foolish mistake you've just made lol. You're supposed to open AustinEngine.exe, not this, goofy ahh :skull: :skull: :skull:", "Foolish mistake") == DialogResult.OK) Application.Exit();
+                if (MessageBox.Show("Hi! I'm the crash handler for Austin Engine. When Austin crashes, I'll show a message with the reason why it crashed. Nice to meet you, fellow Austin Engine user.", "Greetings") == DialogResult.OK) Application.Exit();
             }
         }
 
@@ -98,6 +103,11 @@ namespace austinCrashDiag
             {
                 MessageBox.Show("Error: Unable to find \"AustinEngine.exe\". You changed the engine's filename, didn't you..","Error");
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
